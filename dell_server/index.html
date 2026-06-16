@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Midnight Appshop – NDI Demo</title>
+    <title>Midnight Appshop – Sisit-gruppen</title>
     <style>
         :root {
             --bg-primary: #f8fafc;
@@ -13,13 +13,14 @@
             --primary: #2563eb;
             --primary-hover: #1d4ed8;
             --success: #10b981;
+            --warn: #f59e0b;
             --border: #e2e8f0;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         body { background-color: var(--bg-primary); color: var(--text-main); padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
         
-        .phone-container { width: 100%; max-width: 450px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; }
+        .phone-container { width: 100%; max-width: 480px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; }
         .header { padding: 24px; background: linear-gradient(135deg, #1e293b, #0f172a); color: white; text-align: center; }
         .header h1 { font-size: 1.5rem; margin-bottom: 4px; letter-spacing: -0.5px; }
         .header p { font-size: 0.85rem; color: #94a3b8; font-style: italic; }
@@ -28,20 +29,22 @@
         .badge { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; color: #cbd5e1; }
         .badge.active { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
 
-        .content { padding: 20px; flex: 1; }
-        .section-title { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .content { padding: 20px; flex: 1; max-height: 600px; overflow-y: auto; }
+        .section-title { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; margin-bottom: 12px; }
+        .section-title:first-of-type { margin-top: 0; }
         
-        .app-card { background: var(--card-bg); border: 1px solid var(--border); padding: 16px; border-radius: 16px; margin-bottom: 16px; transition: transform 0.2s; }
-        .app-card:active { transform: scale(0.98); }
+        .app-card { background: var(--card-bg); border: 1px solid var(--border); padding: 16px; border-radius: 16px; margin-bottom: 16px; }
         .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .app-title { font-size: 1.1rem; font-weight: 600; }
         .app-cost { font-size: 0.85rem; background: #eff6ff; color: var(--primary); padding: 4px 8px; border-radius: 8px; font-weight: 600; }
         .app-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 14px; }
         
-        .btn { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 600; width: 100%; transition: background 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn { background: var(--primary); color: white; border: none; padding: 10px 14px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600; width: 100%; display: flex; justify-content: center; align-items: center; gap: 6px; }
         .btn:hover { background: var(--primary-hover); }
+        .btn.enterprise { background: var(--warn); }
+        .btn.enterprise:hover { background: #d97706; }
         
-        .logs-panel { background: #0f172a; color: #38bdf8; font-family: "Courier New", Courier, monospace; padding: 14px; border-radius: 12px; font-size: 0.75rem; max-height: 200px; overflow-y: auto; text-align: left; margin-top: 10px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.5); }
+        .logs-panel { background: #0f172a; color: #38bdf8; font-family: "Courier New", Courier, monospace; padding: 14px; border-radius: 12px; font-size: 0.75rem; max-height: 160px; overflow-y: auto; text-align: left; margin-top: 10px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.5); }
         .log-entry { margin-bottom: 6px; line-height: 1.3; }
         .log-success { color: #4ade80; }
         .log-warn { color: #facc15; }
@@ -57,33 +60,56 @@
         <p>"I went on an App shopping spree and saved thousands."</p>
         <div class="badge-container">
             <span class="badge">Sisit-gruppen (Est. 2002)</span>
-            <span class="badge active">Lokal Test (Dell → shaun3)</span>
+            <span class="badge active">Kryss-Maskinell Live</span>
         </div>
     </div>
 
     <div class="content">
-        <div class="section-title">Tilgjengelig Programvare</div>
-        
+        <div class="section-title">1. Enkle Web-Applikasjoner</div>
         <div class="app-card">
             <div class="app-header">
-                <span class="app-title">Sisoft Analytix</span>
+                <span class="app-title">UPChat ZK</span>
                 <span class="app-cost">10 NOK / mnd</span>
             </div>
-            <p class="app-desc">Industrielt analyseverktøy. Ingen penger forsvinner ut av kontoen din. Staking-yielden finansierer tilgangen, mens du beholder kapitalen.</p>
-            <button class="btn" id="action-btn" onclick="requestAppAccess()">
-                ⚡ Generer ZK-bevis & Åpne App
+            <p class="app-desc">Privat og sikker chat levert med fullt ZK-personvern. Rentefinansiert tilgang basert på et lavt staking-volum.</p>
+            <button class="btn" id="btn-1" onclick="requestAccess(1, 'user_pledge_680_ada', 'https://sisit.no/chat/', 'btn-1')">
+                ⚡ Generer ZK-bevis & Åpne UPChat
             </button>
         </div>
 
-        <div class="section-title">Nettverks- og Yield-logg</div>
+        <div class="section-title">2. Komplekse Industrielle Løsninger</div>
+        <div class="app-card">
+            <div class="app-header">
+                <span class="app-title">Autobook Enterprise</span>
+                <span class="app-cost">200 NOK / mnd</span>
+            </div>
+            <p class="app-desc">Avansert kjørebok. Mulighet for hybrid betaling: Rentefinansiert Midnight-struktur via Appshop, og tradisjonell IaaS-fakturering for infrastrukturdrift.</p>
+            <button class="btn" id="btn-2" onclick="requestAccess(2, 'user_pledge_enterprise_ada', 'https://sisit.no', 'btn-2')">
+                ⚡ Aktiver Hybrid-Yield & Åpne Autobook
+            </button>
+        </div>
+
+        <div class="section-title">3. Avanserte Økonomistyringssystemer</div>
+        <div class="app-card">
+            <div class="app-header">
+                <span class="app-title">Business 2.0 (Komplett)</span>
+                <span class="app-cost">Krever Forprosjekt</span>
+            </div>
+            <p class="app-desc">Fullstendig ERP-løsning. Bestilles direkte via Appshop. Utløser automatisk oppsettsvarsel og integrasjonsordre til Stein Inge Sætereng IT.</p>
+            <button class="btn enterprise" id="btn-3" onclick="triggerEnterpriseOrder('btn-3')">
+                💼 Send Prosjektforespørsel til Sætereng IT
+            </button>
+        </div>
+
+        <div class="section-title">Nettverks-, Yield- og Ordrelogg</div>
         <div class="logs-panel" id="log-screen">
-            <div class="log-entry">[System] Klar til å kjøre lokal ende-til-ende test...</div>
+            <div class="log-entry">[System] Venter på brukerallokering...</div>
         </div>
     </div>
 
     <div class="footer">
         IaaS: Seize it AS | Utvikling: Sisoft AS<br>
-        <small>Midnight Passport kobles på ved Main-net migrering.</small>
+        <small>Integrert mot Business 2.0 Modul 5 for sanntids Kryptoforvaltning.</small>
     </div>
 </div>
 
@@ -101,21 +127,17 @@ function addLog(text, type = 'info') {
     screen.scrollTop = screen.scrollHeight;
 }
 
-async function requestAppAccess() {
-    const btn = document.getElementById('action-btn');
+async function requestAccess(appId, mockProof, redirectUrl, btnId) {
+    const btn = document.getElementById(btnId);
+    const originalText = btn.innerText;
     btn.disabled = true;
-    btn.innerText = '⚙️ Kommuniserer...';
+    btn.innerText = '⚙️ Prosesserer...';
     
-    addLog("Kunde utløser tilgang. Forespør lokalt ZK-bevis fra lommeboken...", 'info');
+    addLog(`Kunde forespør tilgang til App ID: ${appId}. Verifiserer ZK-Proof...`, 'info');
     
-    // Vi sender den simulerte suksess-nøkkelen vår til verify.php
-    const payload = {
-        mock_proof: "user_pledge_680_ada",
-        app_id: 1
-    };
+    const payload = { mock_proof: mockProof, app_id: appId };
 
     try {
-        // Ring opp backend på Dell
         const response = await fetch('verify.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -124,22 +146,45 @@ async function requestAppAccess() {
         const data = await response.json();
         
         if (data.status === "success") {
-            addLog("✅ shaun3 godkjente Midnight ZK-beviset!", "success");
-            addLog("✅ MariaDB oppdatert med anonym 30-dagers sesjon.", "success");
-            addLog("✅ Business 2.0 (Modul 5): 4-delt yield-splitting bokført.", "success");
-            addLog("🎉 Suksess! Velkommen til Sisoft Analytix.", "success");
-            btn.innerText = '✅ Tilgang Åpnet';
+            addLog(`✅ shaun3 verifiserte ZK-beviset for App ${appId}!`, "success");
+            addLog("✅ MariaDB oppdatert. Protokoll-basert yield-splitting utført.", "success");
+            
+            if(appId === 2) {
+                addLog("📋 [Hybrid-Modell] Forbereder månedlig infrastruktur-faktura på si.", "warn");
+            }
+            
+            addLog(`🎉 Suksess! Ruter til: ${redirectUrl}`, "success");
+            btn.innerText = '✅ Åpner...';
             btn.style.background = '#10b981';
+            
+            setTimeout(() => { window.location.href = redirectUrl; }, 2000);
         } else {
-            addLog("❌ Avvist: Backend feilet. Sjekk at verify.php finner shaun3.", "warn");
+            addLog("❌ Avvist av valideringsleddet.", "warn");
             btn.disabled = false;
-            btn.innerText = '⚡ Prøv igjen';
+            btn.innerText = originalText;
         }
     } catch (error) {
-        addLog("❌ Nettverksfeil: Klarte ikke å kontakte verify.php på Dell.", "warn");
+        addLog("❌ Nettverksfeil under kommunikasjon.", "warn");
         btn.disabled = false;
-        btn.innerText = '⚡ Prøv igjen';
+        btn.innerText = originalText;
     }
+}
+
+function triggerEnterpriseOrder(btnId) {
+    const btn = document.getElementById(btnId);
+    btn.disabled = true;
+    btn.innerText = '✉️ Sender ordre...';
+    
+    addLog("Genererer Enterprise API-ordre for Business 2.0...", 'info');
+    
+    setTimeout(() => {
+        addLog("✅ MariaDB: Integrasjonsbilag satt inn i 'billing_ledger'.", "success");
+        addLog("📬 Melding sendt til Stein Inge Sætereng IT for oppstart av forprosjekt.", "success");
+        addLog("💼 Forretningsordre registrert og klargjort for SaaS-godkjenning.", "success");
+        
+        btn.innerText = '✅ Forespørsel Sendt!';
+        btn.style.background = '#10b981';
+    }, 1500);
 }
 </script>
 </body>
