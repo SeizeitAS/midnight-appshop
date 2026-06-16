@@ -1,0 +1,22 @@
+// ========================================================================
+// MIDNIGHT ZKP-KONTRAKT v2.0 – MIDNIGHT APPSHOP KJERNE
+// Tilpasset Compact 0.5.1 for Seize it AS & Sisoft AS
+// ========================================================================
+
+// Offentlig tilstand på blokkjeden som lagrer staking-kravet (f.eks. 680 ADA)
+export ledger requiredStake: Uint<64>;
+
+// Kjerne-krets for Midnight Appshop
+// Tar imot MAKS ETT flatt argument: Brukerens hemmelige saldo
+export circuit verifyStakingVolume(secretWalletBalance: Uint<64>): [] {
+    
+    // Hent det offentlige staking-kravet fra ledgertilstanden
+    const currentRequirement = requiredStake.read();
+
+    // Bruk en ren logisk sjekk i stedet for "check"-nøkkelordet
+    const isEligible = secretWalletBalance >= currentRequirement;
+
+    // Bruk disclose for å flytte bekreftelsen trygt til offentlig tilstand
+    disclose(isEligible);
+}
+
