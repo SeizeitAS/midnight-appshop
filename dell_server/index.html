@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Appshop – NDI Demo</title>
+    <style>
+        :root {
+            --bg-primary: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --success: #10b981;
+            --border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: var(--bg-primary); color: var(--text-main); padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        .phone-container { width: 100%; max-width: 450px; background: var(--card-bg); border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; }
+        .header { padding: 24px; background: linear-gradient(135deg, #1e293b, #0f172a); color: white; text-align: center; }
+        .header h1 { font-size: 1.5rem; margin-bottom: 4px; letter-spacing: -0.5px; }
+        .header p { font-size: 0.85rem; color: #94a3b8; font-style: italic; }
+        
+        .badge-container { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+        .badge { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; color: #cbd5e1; }
+        .badge.active { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+        .content { padding: 20px; flex: 1; }
+        .section-title { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        
+        .app-card { background: var(--card-bg); border: 1px solid var(--border); padding: 16px; border-radius: 16px; margin-bottom: 16px; transition: transform 0.2s; }
+        .app-card:active { transform: scale(0.98); }
+        .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .app-title { font-size: 1.1rem; font-weight: 600; }
+        .app-cost { font-size: 0.85rem; background: #eff6ff; color: var(--primary); padding: 4px 8px; border-radius: 8px; font-weight: 600; }
+        .app-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 14px; }
+        
+        .btn { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 600; width: 100%; transition: background 0.2s; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        .btn:hover { background: var(--primary-hover); }
+        
+        .logs-panel { background: #0f172a; color: #38bdf8; font-family: "Courier New", Courier, monospace; padding: 14px; border-radius: 12px; font-size: 0.75rem; max-height: 200px; overflow-y: auto; text-align: left; margin-top: 10px; box-shadow: inset 0 2px 8px rgba(0,0,0,0.5); }
+        .log-entry { margin-bottom: 6px; line-height: 1.3; }
+        .log-success { color: #4ade80; }
+        .log-warn { color: #facc15; }
+        
+        .footer { padding: 16px; text-align: center; border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--text-muted); background: #fafafa; }
+    </style>
+</head>
+<body>
+
+<div class="phone-container">
+    <div class="header">
+        <h1>Midnight Appshop</h1>
+        <p>"I went on an App shopping spree and saved thousands."</p>
+        <div class="badge-container">
+            <span class="badge">Sisit-gruppen (Est. 2002)</span>
+            <span class="badge active">Lokal Test (Dell → shaun3)</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section-title">Tilgjengelig Programvare</div>
+        
+        <div class="app-card">
+            <div class="app-header">
+                <span class="app-title">Sisoft Analytix</span>
+                <span class="app-cost">10 NOK / mnd</span>
+            </div>
+            <p class="app-desc">Industrielt analyseverktøy. Ingen penger forsvinner ut av kontoen din. Staking-yielden finansierer tilgangen, mens du beholder kapitalen.</p>
+            <button class="btn" id="action-btn" onclick="requestAppAccess()">
+                ⚡ Generer ZK-bevis & Åpne App
+            </button>
+        </div>
+
+        <div class="section-title">Nettverks- og Yield-logg</div>
+        <div class="logs-panel" id="log-screen">
+            <div class="log-entry">[System] Klar til å kjøre lokal ende-til-ende test...</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        IaaS: Seize it AS | Utvikling: Sisoft AS<br>
+        <small>Midnight Passport kobles på ved Main-net migrering.</small>
+    </div>
+</div>
+
+<script>
+function addLog(text, type = 'info') {
+    const screen = document.getElementById('log-screen');
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+    if(type === 'success') entry.className += ' log-success';
+    if(type === 'warn') entry.className += ' log-warn';
+    
+    const time = new Date().toLocaleTimeString();
+    entry.innerText = `[${time}] ${text}`;
+    screen.appendChild(entry);
+    screen.scrollTop = screen.scrollHeight;
+}
+
+async function requestAppAccess() {
+    const btn = document.getElementById('action-btn');
+    btn.disabled = true;
+    btn.innerText = '⚙️ Kommuniserer...';
+    
+    addLog("Kunde utløser tilgang. Forespør lokalt ZK-bevis fra lommeboken...", 'info');
+    
+    // Vi sender den simulerte suksess-nøkkelen vår til verify.php
+    const payload = {
+        mock_proof: "user_pledge_680_ada",
+        app_id: 1
+    };
+
+    try {
+        // Ring opp backend på Dell
+        const response = await fetch('verify.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        
+        if (data.status === "success") {
+            addLog("✅ shaun3 godkjente Midnight ZK-beviset!", "success");
+            addLog("✅ MariaDB oppdatert med anonym 30-dagers sesjon.", "success");
+            addLog("✅ Business 2.0 (Modul 5): 4-delt yield-splitting bokført.", "success");
+            addLog("🎉 Suksess! Velkommen til Sisoft Analytix.", "success");
+            btn.innerText = '✅ Tilgang Åpnet';
+            btn.style.background = '#10b981';
+        } else {
+            addLog("❌ Avvist: Backend feilet. Sjekk at verify.php finner shaun3.", "warn");
+            btn.disabled = false;
+            btn.innerText = '⚡ Prøv igjen';
+        }
+    } catch (error) {
+        addLog("❌ Nettverksfeil: Klarte ikke å kontakte verify.php på Dell.", "warn");
+        btn.disabled = false;
+        btn.innerText = '⚡ Prøv igjen';
+    }
+}
+</script>
+</body>
+</html>
+

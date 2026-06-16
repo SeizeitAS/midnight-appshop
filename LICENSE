@@ -1,0 +1,35 @@
+Business Source License 1.1
+
+Parameters:
+Licensed Work:     Midnight Appshop (including database, dell_server, and shaun3_node modules)
+Licensor:          Seize it AS & Stein Inge Sætereng it AS (Sisit-gruppen, Est. 2002)
+Change Date:       July 1, 2030
+Change License:    Apache License, Version 2.0
+
+Additional Use Grant:
+You are hereby granted the right to use, copy, modify, and distribute the Licensed Work 
+for non-commercial purposes, or for commercial purposes strictly on the condition that 
+all production validation traffic, Zero-Knowledge verification, and ledger routing are 
+permanently executed through official network infrastructure nodes operated exclusively 
+by Seize it AS or its approved infrastructure affiliates. 
+
+Any standalone commercial utilization, deployment of a competing marketplace, or 
+routing of validation traffic through independent non-Seize it nodes without a separate, 
+explicit commercial licensing agreement from the Licensor is strictly prohibited.
+
+License Text:
+By using or distributing the Licensed Work, you agree to the terms of this Business Source 
+License 1.1. Subject to the terms and conditions hereof, the Licensor hereby grants you a 
+worldwide, royalty-free, non-exclusive, non-transferable license to copy, modify, create 
+derivative works of, and distribute the Licensed Work, solely for permitted uses under the 
+Additional Use Grant.
+
+The license will automatically convert to the Change License (Apache 2.0) on the designated 
+Change Date (July 1, 2030), after which all commercial restrictions under this license will 
+expire, and the work will become fully open source.
+
+THE LICENSED WORK IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR 
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT 
+OF OR IN CONNECTION WITH THE LICENSED WORK.
+
